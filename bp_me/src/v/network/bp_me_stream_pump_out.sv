@@ -134,7 +134,7 @@ module bp_me_stream_pump_out
           // only send msg on last FSM beat
           msg_v_o = fsm_v_i & fsm_last_o;
           // ack all but last FSM beat silently, then ack last FSM beat when msg beat sends
-          fsm_ready_and_o = (fsm_v_i & ~fsm_last_o) | msg_ready_and_i;
+          fsm_ready_and_o = ~fsm_last_o | msg_ready_and_i;
           cnt_up = fsm_ready_and_o & fsm_v_i;
           // hold address constant at critical address
           msg_header_cast_o.addr = fsm_header_cast_i.addr;
